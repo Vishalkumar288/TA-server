@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const speakeasy = require('speakeasy');
 const qrcode = require('qrcode');
-const User = require('../models/User');
+const User = require('./models/User');
 
 const MONGO_URI = process.env.MONGO_URI;
 const HARDCODED_EMAIL = process.env.HARDCODED_EMAIL ;
