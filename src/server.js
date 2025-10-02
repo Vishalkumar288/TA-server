@@ -11,7 +11,7 @@ const FormData = require("./models/FormData");
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3000" })); // allow Next dev server
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 
 const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 4000;
