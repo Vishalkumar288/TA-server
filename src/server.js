@@ -11,7 +11,25 @@ const FormData = require("./models/FormData");
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: process.env.FRONTEND_URL }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow requests with no origin like Postman
+      if (!origin) return callback(null, true);
+
+      const allowedOrigins = [
+        process.env.FRONTEND_URL,
+        "http://localhost:3000"
+      ];
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true // if your frontend sends cookies or auth headers
+  })
+);
 
 const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 4000;
